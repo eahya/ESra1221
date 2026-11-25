@@ -1,1 +1,1577 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESRAA – إسراء 🌷</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FDFBF7',
+                        ivory: '#FAF6F0',
+                        softpink: '#F7EBE8',
+                        gold: '#D4AF37',
+                        goldlight: '#F3E5AB',
+                        golddark: '#997A15',
+                        rosewhite: '#FFFDFB'
+                    },
+                    fontFamily: {
+                        amiri: ['Amiri', 'serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                        montserrat: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Customizations & Animations */
+        body {
+            font-family: 'Tajawal', 'Montserrat', sans-serif;
+            background-color: #FDFBF7;
+            color: #2D2727;
+            overflow-x: hidden;
+        }
+
+        .font-serif-title {
+            font-family: 'Amiri', 'Playfair Display', serif;
+        }
+
+        /* Golden Sparkle Glow */
+        .gold-glow {
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4), 0 0 25px rgba(212, 175, 55, 0.2);
+        }
+        
+        .box-gold-glow {
+            box-shadow: 0 10px 30px -5px rgba(212, 175, 55, 0.25), 0 0 15px rgba(243, 229, 171, 0.3);
+        }
+
+        .gold-border-gradient {
+            border-image: linear-gradient(to right, #F3E5AB, #D4AF37, #F3E5AB) 1;
+        }
+
+        /* Glassmorphism Luxury Style */
+        .glass-card {
+            background: rgba(255, 253, 251, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .glass-modal {
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        /* Falling Petals Canvas Positioning */
+        #petals-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        /* Paper Letter Styling for Messages */
+        .paper-letter {
+            background: #FAF6F0;
+            background-image: radial-gradient(#E8DFD8 1px, transparent 0);
+            background-size: 24px 24px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06), inset 0 0 60px rgba(212, 175, 55, 0.05);
+            position: relative;
+        }
+
+        .paper-letter::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            margin: 8px;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #997A15;
+        }
+
+        /* Shimmer Effect */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, #D4AF37 0%, #FFF8DC 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen">
+
+    <!-- Petals Canvas Animation -->
+    <canvas id="petals-canvas"></canvas>
+
+    <!-- Global Audio Player (Hidden Engine) -->
+    <audio id="bg-music" loop>
+        <!-- Royalty free soft ambient relaxation piano -->
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-112702.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- LOADING SCREEN -->
+    <div id="loading-screen" class="fixed inset-0 bg-cream z-50 flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative flex items-center justify-center">
+            <!-- Animated White Rose Spinner -->
+            <div class="w-24 h-24 border-4 border-gold/20 border-t-gold rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center text-gold text-2xl">
+                🌷
+            </div>
+        </div>
+        <h2 class="mt-6 text-xl font-serif-title text-gold tracking-widest shimmer-text font-bold" id="load-text">جاري تحميل عالم إسراء...</h2>
+    </div>
+
+    <!-- HERO / SPLASH SCREEN -->
+    <section id="hero-screen" class="fixed inset-0 z-40 bg-cream flex flex-col justify-between items-center px-4 py-8 text-center transition-all duration-1000">
+        <!-- Floating Rose Accent Background Effects -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
+            <div class="absolute top-10 left-10 w-72 h-72 rounded-full bg-softpink blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-goldlight/30 blur-3xl"></div>
+        </div>
+
+        <!-- Top Header Navigation inside Hero -->
+        <div class="w-full max-w-6xl flex justify-between items-center z-10">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <span class="text-2xl">🌷</span>
+                <span class="font-serif-title font-bold text-lg text-gold tracking-widest">ESRAA</span>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <!-- Music Toggle Button -->
+                <button id="music-btn" onclick="toggleMusic()" class="px-4 py-2 rounded-full glass-card hover:bg-gold/10 transition-all text-xs md:text-sm text-gray-700 flex items-center gap-2 border border-gold/30">
+                    <i id="music-icon" class="fas fa-music text-gold"></i>
+                    <span id="music-status-text">تشغيل الموسيقى</span>
+                </button>
+                <!-- Language Toggle Button -->
+                <button onclick="toggleLanguage()" class="px-4 py-2 rounded-full glass-card hover:bg-gold/10 transition-all text-xs md:text-sm text-gray-700 font-semibold border border-gold/30">
+                    <span id="lang-btn-text">English</span>
+                </button>
+                <!-- Admin Gateway Button -->
+                <button onclick="openAdminAuthModal()" class="w-9 h-9 rounded-full glass-card hover:bg-gold/20 flex items-center justify-center text-gold border border-gold/30 transition-all">
+                    <i class="fas fa-lock text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hero Center Banner -->
+        <div class="z-10 my-auto max-w-3xl flex flex-col items-center">
+            <div class="inline-block mb-4 p-3 rounded-full bg-rosewhite border border-gold/30 box-gold-glow animate-float">
+                <svg class="w-16 h-16 text-gold" viewBox="0 0 100 100" fill="currentColor">
+                    <path d="M50,15 C40,5 25,10 20,25 C15,40 30,55 50,75 C70,55 85,40 80,25 C75,10 60,5 50,15 Z" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                    <path d="M50,20 C43,12 30,16 26,28 C22,40 35,50 50,65 C65,50 78,40 74,28 C70,16 57,12 50,20 Z" fill="#F7EBE8" opacity="0.6"/>
+                    <circle cx="50" cy="35" r="8" fill="#D4AF37" opacity="0.8"/>
+                </svg>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-serif-title font-bold text-gray-800 tracking-wider mb-2" id="hero-title">
+                إسـراء
+            </h1>
+            <p class="text-xl md:text-2xl font-serif-title text-gold tracking-widest shimmer-text mb-6" id="hero-subtitle">
+                ESRAA WORLD
+            </p>
+
+            <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent mb-6"></div>
+
+            <p class="text-gray-600 md:text-lg max-w-xl mx-auto leading-relaxed font-light mb-8 italic" id="hero-quote">
+                "عالمٌ ينبض بالورد الأبيض والجمال الهادئ، مكرّس لأجمل التفاصيل وأرقّ الذكريات."
+            </p>
+
+            <!-- Enter Button -->
+            <button onclick="enterWorld()" class="group relative px-8 py-4 rounded-full bg-gradient-to-r from-goldlight via-gold to-golddark text-white font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-3 overflow-hidden">
+                <span class="relative z-10" id="hero-enter-btn">دخول إلى عالم إسراء</span>
+                <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform relative z-10" id="hero-btn-arrow"></i>
+                <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
+            </button>
+        </div>
+
+        <!-- Bottom Romantic Footer Note -->
+        <div class="z-10 text-xs text-gray-400 tracking-widest font-light">
+            <span id="hero-footer-tag">تصميم رومانسي فاخر • مخصص لإسراء</span>
+        </div>
+    </section>
+
+    <!-- MAIN APP WRAPPER (Hidden initially until Enter World is clicked) -->
+    <div id="main-app" class="opacity-0 transition-opacity duration-1000 pointer-events-none">
+        
+        <!-- Sticky Navbar for Main World -->
+        <nav class="sticky top-0 z-30 glass-card border-b border-gold/20 px-4 py-3">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <a href="#hero-screen" onclick="exitWorld()" class="flex items-center gap-2 text-gold font-serif-title font-bold text-xl hover:opacity-80 transition-opacity">
+                    <span>🌷</span>
+                    <span id="nav-brand">ESRAA</span>
+                </a>
+
+                <!-- Navigation Links -->
+                <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-700" id="nav-links">
+                    <a href="#memories-sec" class="hover:text-gold transition-colors" data-i18n="nav_memories">الذكريات</a>
+                    <a href="#gallery-sec" class="hover:text-gold transition-colors" data-i18n="nav_gallery">معرض الصور</a>
+                    <a href="#ideas-sec" class="hover:text-gold transition-colors" data-i18n="nav_ideas">الأفكار والملاحظات</a>
+                    <a href="#messages-sec" class="hover:text-gold transition-colors" data-i18n="nav_messages">الرسائل الخاصة</a>
+                    <a href="#wishes-sec" class="hover:text-gold transition-colors" data-i18n="nav_wishes">قائمة الأمنيات</a>
+                    <a href="#surprises-sec" class="hover:text-gold transition-colors" data-i18n="nav_surprises">المفاجآت</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button id="nav-music-btn" onclick="toggleMusic()" class="w-9 h-9 rounded-full bg-rosewhite border border-gold/30 flex items-center justify-center text-gold hover:bg-gold/10 transition-colors">
+                        <i id="nav-music-icon" class="fas fa-music text-xs"></i>
+                    </button>
+
+                    <button onclick="toggleLanguage()" class="px-3 py-1.5 text-xs rounded-full bg-rosewhite border border-gold/30 font-semibold hover:bg-gold/10 transition-colors">
+                        <span id="nav-lang-text">English</span>
+                    </button>
+
+                    <button onclick="openAdminAuthModal()" class="px-3 py-1.5 text-xs rounded-full bg-gold text-white font-semibold hover:bg-golddark transition-colors flex items-center gap-1">
+                        <i class="fas fa-user-shield text-xs"></i>
+                        <span data-i18n="nav_admin">الأدمن</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dynamic Header Banner Section -->
+        <header class="relative py-20 px-4 text-center overflow-hidden bg-gradient-to-b from-cream via-softpink/20 to-cream">
+            <div class="max-w-4xl mx-auto relative z-10">
+                <span class="text-gold text-sm tracking-widest font-semibold uppercase block mb-2" data-i18n="header_subtitle">عالم مخصص لحبيبة العمر</span>
+                <h2 class="text-4xl md:text-6xl font-serif-title font-bold text-gray-800 mb-4" id="main-header-title">إسراء | Esraa</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm md:text-base font-light italic" id="main-header-quote">
+                    "في هذا المكان، يزهر الورد الأبيض تخليداً لكل لحظة جميلة وابتسامة صادقة."
+                </p>
+            </div>
+        </header>
+
+        <!-- SECTION 1: MEMORIES (قسم الذكريات) -->
+        <section id="memories-sec" class="py-16 px-4 max-w-7xl mx-auto border-b border-gold/10">
+            <div class="text-center mb-12">
+                <span class="text-gold text-2xl mb-2 block">🕊️</span>
+                <h3 class="text-3xl font-serif-title font-bold text-gray-800" data-i18n="sec_memories_title">قسم الذكريات</h3>
+                <p class="text-gray-500 text-sm mt-1" data-i18n="sec_memories_sub">لحظات حُفرت في الوجدان بجمالها</p>
+                <div class="w-16 h-0.5 bg-gold mx-auto mt-3"></div>
+            </div>
+
+            <!-- Memories Grid Container -->
+            <div id="memories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically Inserted Cards -->
+            </div>
+        </section>
+
+        <!-- SECTION 2: PHOTO GALLERY (قسم الصور) -->
+        <section id="gallery-sec" class="py-16 px-4 max-w-7xl mx-auto border-b border-gold/10 bg-ivory/50 rounded-3xl my-8">
+            <div class="text-center mb-12">
+                <span class="text-gold text-2xl mb-2 block">📸</span>
+                <h3 class="text-3xl font-serif-title font-bold text-gray-800" data-i18n="sec_gallery_title">قسم الصور الاحترافي</h3>
+                <p class="text-gray-500 text-sm mt-1" data-i18n="sec_gallery_sub">معرض صور بنقاء الورد الأبيض</p>
+                <div class="w-16 h-0.5 bg-gold mx-auto mt-3"></div>
+            </div>
+
+            <!-- Filter Tags (Optional) & Gallery Grid -->
+            <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <!-- Dynamically Inserted Photo Cards -->
+            </div>
+        </section>
+
+        <!-- SECTION 3: IDEAS & NOTES (قسم الأفكار) -->
+        <section id="ideas-sec" class="py-16 px-4 max-w-7xl mx-auto border-b border-gold/10">
+            <div class="text-center mb-12">
+                <span class="text-gold text-2xl mb-2 block">💡</span>
+                <h3 class="text-3xl font-serif-title font-bold text-gray-800" data-i18n="sec_ideas_title">قسم الأفكار والملاحظات</h3>
+                <p class="text-gray-500 text-sm mt-1" data-i18n="sec_ideas_sub">رؤى وخطط لمستقبل أجمل</p>
+                <div class="w-16 h-0.5 bg-gold mx-auto mt-3"></div>
+            </div>
+
+            <div id="ideas-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically Inserted Sticky Ideas -->
+            </div>
+        </section>
+
+        <!-- SECTION 4: PAPER MESSAGES (قسم الرسائل) -->
+        <section id="messages-sec" class="py-16 px-4 max-w-5xl mx-auto border-b border-gold/10">
+            <div class="text-center mb-12">
+                <span class="text-gold text-2xl mb-2 block">✉️</span>
+                <h3 class="text-3xl font-serif-title font-bold text-gray-800" data-i18n="sec_messages_title">قسم الرسائل الخاصة</h3>
+                <p class="text-gray-500 text-sm mt-1" data-i18n="sec_messages_sub">رسائل مطوية بحب وشغف</p>
+                <div class="w-16 h-0.5 bg-gold mx-auto mt-3"></div>
+            </div>
+
+            <div id="messages-list" class="space-y-6">
+                <!-- Paper Envelope Messages inserted dynamically -->
+            </div>
+        </section>
+
+        <!-- SECTION 5: WISHES LIST (قسم الأمنيات) -->
+        <section id="wishes-sec" class="py-16 px-4 max-w-4xl mx-auto border-b border-gold/10 bg-rosewhite/70 rounded-3xl my-8 p-6 md:p-10 shadow-sm border">
+            <div class="text-center mb-8">
+                <span class="text-gold text-2xl mb-2 block">✨</span>
+                <h3 class="text-3xl font-serif-title font-bold text-gray-800" data-i18n="sec_wishes_title">قائمة الأمنيات</h3>
+                <p class="text-gray-500 text-sm mt-1" data-i18n="sec_wishes_sub">أحلام نسعى لتحقيقها معاً</p>
+                <div class="w-16 h-0.5 bg-gold mx-auto mt-3"></div>
+            </div>
+
+            <!-- Wishes Progress Bar -->
+            <div class="mb-8 bg-ivory p-4 rounded-2xl border border-gold/20">
+                <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                    <span class="text-gray-700" data-i18n="wishes_progress_label">نسبة الأمنيات المحققة</span>
+                    <span id="wishes-percentage" class="text-gold">0%</span>
+                </div>
+                <div class="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                    <div id="wishes-progress-bar" class="h-full bg-gradient-to-r from-goldlight to-gold transition-all duration-500 w-0"></div>
+                </div>
+            </div>
+
+            <div id="wishes-container" class="space-y-4">
+                <!-- Wishes Items Dynamic -->
+            </div>
+        </section>
+
+        <!-- SECTION 6: SURPRISES BOX (قسم المفاجآت) -->
+        <section id="surprises-sec" class="py-16 px-4 max-w-6xl mx-auto mb-16">
+            <div class="text-center mb-12">
+                <span class="text-gold text-2xl mb-2 block">🎁</span>
+                <h3 class="text-3xl font-serif-title font-bold text-gray-800" data-i18n="sec_surprises_title">قسم المفاجآت</h3>
+                <p class="text-gray-500 text-sm mt-1" data-i18n="sec_surprises_sub">اضغطي على الصناديق لاكتشاف اللمسات السحرية</p>
+                <div class="w-16 h-0.5 bg-gold mx-auto mt-3"></div>
+            </div>
+
+            <div id="surprises-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamic Gift Boxes -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-ivory border-t border-gold/20 py-10 px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <span class="text-3xl block mb-3">🌷</span>
+                <h4 class="text-2xl font-serif-title font-bold text-gray-800 mb-2">ESRAA WORLD</h4>
+                <p class="text-gray-500 text-sm mb-6" data-i18n="footer_quote">صُنِعَ بشغف وحب لإسراء • كل الأوقات أجمل معكِ</p>
+                <p class="text-xs text-gray-400">© ESRAA - All Rights Reserved</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- LIGHTBOX MODAL FOR IMAGES -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-gold transition-colors z-10">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="max-w-4xl w-full max-h-[90vh] flex flex-col items-center justify-center">
+            <img id="lightbox-img" src="" alt="Zoom Image" class="max-h-[75vh] max-w-full object-contain rounded-xl shadow-2xl">
+            <p id="lightbox-caption" class="text-white font-serif-title text-center mt-4 text-lg"></p>
+        </div>
+    </div>
+
+    <!-- ADMIN AUTH MODAL -->
+    <div id="admin-auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass-modal rounded-3xl p-8 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeAdminAuthModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gold text-lg">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-gold/10 text-gold rounded-full flex items-center justify-center mx-auto mb-3 text-2xl">
+                    <i class="fas fa-user-lock"></i>
+                </div>
+                <h3 class="text-2xl font-serif-title font-bold text-gray-800" data-i18n="admin_auth_title">دخول الأدمن</h3>
+                <p class="text-xs text-gray-500 mt-1" data-i18n="admin_auth_sub">أدخل كلمة المرور للوصول إلى لوحة التحكم</p>
+            </div>
+            
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-700 mb-1" data-i18n="admin_pass_label">كلمة المرور</label>
+                    <input type="password" id="admin-password-input" placeholder="••••••••" required class="w-full px-4 py-3 rounded-xl border border-gold/30 bg-white focus:outline-none focus:ring-2 focus:ring-gold text-center text-lg">
+                </div>
+                <div id="admin-auth-error" class="text-red-500 text-xs text-center hidden" data-i18n="admin_pass_error">
+                    كلمة المرور غير صحيحة! (الافتراضية: S12)
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-gold text-white font-bold hover:bg-golddark transition-colors shadow-md" data-i18n="admin_login_btn">
+                    تسجيل الدخول
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN ADMIN CONTROL PANEL (FULLSCREEN MODAL) -->
+    <div id="admin-panel-modal" class="fixed inset-0 z-50 bg-cream hidden flex flex-col overflow-y-auto">
+        <!-- Admin Header -->
+        <div class="bg-ivory border-b border-gold/30 px-6 py-4 flex justify-between items-center sticky top-0 z-20 shadow-sm">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">👑</span>
+                <h3 class="text-xl font-serif-title font-bold text-gray-800" data-i18n="admin_panel_heading">لوحة تحكم الأدمن الشاملة</h3>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="saveAllAdminChanges()" class="px-5 py-2 rounded-full bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 shadow transition-colors flex items-center gap-2">
+                    <i class="fas fa-save"></i>
+                    <span data-i18n="admin_save_btn">حفظ جميع التعديلات</span>
+                </button>
+                <button onclick="closeAdminPanel()" class="px-4 py-2 rounded-full bg-gray-200 text-gray-700 font-semibold text-sm hover:bg-gray-300 transition-colors">
+                    <span data-i18n="admin_close_btn">إغلاق والمعاينة</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Admin Content Body Tabs -->
+        <div class="max-w-7xl w-full mx-auto p-6 flex-grow">
+            <!-- Admin Navigation Tabs -->
+            <div class="flex flex-wrap gap-2 mb-8 border-b border-gold/20 pb-4">
+                <button onclick="switchAdminTab('general')" class="admin-tab-btn active px-4 py-2 rounded-xl bg-gold text-white text-sm font-semibold" data-tab="general" data-i18n="tab_general">الإعدادات العامة والنصوص</button>
+                <button onclick="switchAdminTab('memories')" class="admin-tab-btn px-4 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm font-semibold" data-tab="memories" data-i18n="tab_memories">إدارة الذكريات</button>
+                <button onclick="switchAdminTab('gallery')" class="admin-tab-btn px-4 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm font-semibold" data-tab="gallery" data-i18n="tab_gallery">إدارة الصور</button>
+                <button onclick="switchAdminTab('ideas')" class="admin-tab-btn px-4 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm font-semibold" data-tab="ideas" data-i18n="tab_ideas">إدارة الأفكار</button>
+                <button onclick="switchAdminTab('messages')" class="admin-tab-btn px-4 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm font-semibold" data-tab="messages" data-i18n="tab_messages">إدارة الرسائل</button>
+                <button onclick="switchAdminTab('wishes')" class="admin-tab-btn px-4 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm font-semibold" data-tab="wishes" data-i18n="tab_wishes">إدارة الأمنيات</button>
+                <button onclick="switchAdminTab('surprises')" class="admin-tab-btn px-4 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm font-semibold" data-tab="surprises" data-i18n="tab_surprises">إدارة المفاجآت</button>
+                <button onclick="switchAdminTab('security')" class="admin-tab-btn px-4 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm font-semibold" data-tab="security" data-i18n="tab_security">الأمان والنسخ الاحتياطي</button>
+            </div>
+
+            <!-- TAB 1: GENERAL & SITE SETTINGS -->
+            <div id="admin-tab-general" class="admin-tab-content space-y-6">
+                <div class="glass-card p-6 rounded-2xl space-y-4">
+                    <h4 class="font-bold text-lg text-gray-800 border-b border-gold/20 pb-2" data-i18n="adm_site_titles">عناوين الموقع والنصوص الترحيبية</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">اسم الموقع (بالعربية)</label>
+                            <input type="text" id="adm-site-name-ar" class="w-full p-2.5 rounded-lg border border-gold/30">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">اسم الموقع (بالإنجليزية)</label>
+                            <input type="text" id="adm-site-name-en" class="w-full p-2.5 rounded-lg border border-gold/30">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">العبارة الترحيبية بالشاشة الرئيسية (عربي)</label>
+                            <textarea id="adm-hero-quote-ar" rows="2" class="w-full p-2.5 rounded-lg border border-gold/30"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">العبارة الترحيبية بالشاشة الرئيسية (English)</label>
+                            <textarea id="adm-hero-quote-en" rows="2" class="w-full p-2.5 rounded-lg border border-gold/30"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl space-y-4">
+                    <h4 class="font-bold text-lg text-gray-800 border-b border-gold/20 pb-2" data-i18n="adm_anim_settings">إعدادات الأنيميشن والموسيقى</h4>
+                    <div class="flex items-center gap-6">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="adm-toggle-petals" checked class="w-5 h-5 accent-gold">
+                            <span class="text-sm font-semibold text-gray-700">تفعيل حركة تساقط بتلات الورد</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" id="adm-toggle-music-auto" class="w-5 h-5 accent-gold">
+                            <span class="text-sm font-semibold text-gray-700">تشغيل الموسيقى تلقائياً عند الدخول</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: MEMORIES MANAGEMENT -->
+            <div id="admin-tab-memories" class="admin-tab-content space-y-6 hidden">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_add_memory">إضافة ذكرى جديدة</h4>
+                    <form onsubmit="handleAddMemory(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="mem-title" placeholder="عنوان الذكرى" required class="p-2.5 rounded-lg border border-gold/30">
+                        <input type="date" id="mem-date" required class="p-2.5 rounded-lg border border-gold/30">
+                        <input type="file" id="mem-image-file" accept="image/*" class="p-2 rounded-lg border border-gold/30 md:col-span-2">
+                        <textarea id="mem-desc" placeholder="وصف الذكرى أو تفاصيلها الشاعريّة..." rows="3" required class="p-2.5 rounded-lg border border-gold/30 md:col-span-2"></textarea>
+                        <button type="submit" class="py-2.5 px-6 bg-gold text-white rounded-lg font-bold hover:bg-golddark transition-colors md:col-span-2">إضافة الذكرى</button>
+                    </form>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_current_memories">الذكريات الحالية</h4>
+                    <div id="adm-memories-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- TAB 3: GALLERY MANAGEMENT -->
+            <div id="admin-tab-gallery" class="admin-tab-content space-y-6 hidden">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_upload_photo">رفع صورة جديدة للمعرض</h4>
+                    <form onsubmit="handleAddGalleryPhoto(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="gal-caption" placeholder="عنوان أو تعليق على الصورة" required class="p-2.5 rounded-lg border border-gold/30">
+                        <input type="text" id="gal-tag" placeholder="التصنيف (مثال: ورد، رحلات، ابتسامة)" class="p-2.5 rounded-lg border border-gold/30">
+                        <input type="file" id="gal-image-file" accept="image/*" required class="p-2 rounded-lg border border-gold/30 md:col-span-2">
+                        <button type="submit" class="py-2.5 px-6 bg-gold text-white rounded-lg font-bold hover:bg-golddark transition-colors md:col-span-2">رفع الصورة</button>
+                    </form>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_current_photos">الصور الحالية</h4>
+                    <div id="adm-gallery-list" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
+                </div>
+            </div>
+
+            <!-- TAB 4: IDEAS MANAGEMENT -->
+            <div id="admin-tab-ideas" class="admin-tab-content space-y-6 hidden">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_add_idea">إضافة فكرة أو ملاحظة جديدة</h4>
+                    <form onsubmit="handleAddIdea(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="idea-title" placeholder="عنوان الفكرة" required class="p-2.5 rounded-lg border border-gold/30">
+                        <input type="text" id="idea-category" placeholder="التصنيف (مثال: خطط مستقبلية، هدايا)" class="p-2.5 rounded-lg border border-gold/30">
+                        <textarea id="idea-content" placeholder="محتوى الفكرة والتفاصيل..." rows="3" required class="p-2.5 rounded-lg border border-gold/30 md:col-span-2"></textarea>
+                        <label class="flex items-center gap-2 cursor-pointer md:col-span-2">
+                            <input type="checkbox" id="idea-pinned" class="w-4 h-4 accent-gold">
+                            <span class="text-sm text-gray-700">تثبيت هذه الفكرة في البداية 📌</span>
+                        </label>
+                        <button type="submit" class="py-2.5 px-6 bg-gold text-white rounded-lg font-bold hover:bg-golddark transition-colors md:col-span-2">إضافة الفكرة</button>
+                    </form>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_current_ideas">الأفكار والملاحظات الحالية</h4>
+                    <div id="adm-ideas-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- TAB 5: MESSAGES MANAGEMENT -->
+            <div id="admin-tab-messages" class="admin-tab-content space-y-6 hidden">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_add_msg">إضافة رسالة خاصة جديدة</h4>
+                    <form onsubmit="handleAddMessage(event)" class="grid grid-cols-1 gap-4">
+                        <input type="text" id="msg-title" placeholder="عنوان الرسالة (مثال: إلى وردتي الجميلة)" required class="p-2.5 rounded-lg border border-gold/30">
+                        <input type="text" id="msg-date" placeholder="التاريخ أو المناسبة" class="p-2.5 rounded-lg border border-gold/30">
+                        <textarea id="msg-body" placeholder="محتوى الرسالة الشاعري..." rows="4" required class="p-2.5 rounded-lg border border-gold/30"></textarea>
+                        <button type="submit" class="py-2.5 px-6 bg-gold text-white rounded-lg font-bold hover:bg-golddark transition-colors">إضافة الرسالة</button>
+                    </form>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_current_msgs">الرسائل الحالية</h4>
+                    <div id="adm-messages-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- TAB 6: WISHES MANAGEMENT -->
+            <div id="admin-tab-wishes" class="admin-tab-content space-y-6 hidden">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_add_wish">إضافة أمنية جديدة</h4>
+                    <form onsubmit="handleAddWish(event)" class="flex gap-4">
+                        <input type="text" id="wish-text" placeholder="اكتب الأمنية هنا..." required class="flex-grow p-2.5 rounded-lg border border-gold/30">
+                        <button type="submit" class="py-2.5 px-6 bg-gold text-white rounded-lg font-bold hover:bg-golddark transition-colors">إضافة</button>
+                    </form>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_current_wishes">قائمة الأمنيات</h4>
+                    <div id="adm-wishes-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- TAB 7: SURPRISES MANAGEMENT -->
+            <div id="admin-tab-surprises" class="admin-tab-content space-y-6 hidden">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_add_surprise">إضافة مفاجأة جديدة</h4>
+                    <form onsubmit="handleAddSurprise(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="surp-title" placeholder="عنوان صندوق المفاجأة" required class="p-2.5 rounded-lg border border-gold/30">
+                        <input type="text" id="surp-icon" placeholder="أيقونة أو رمز (مثال: 🎁, 🌹, 👑)" class="p-2.5 rounded-lg border border-gold/30">
+                        <textarea id="surp-content" placeholder="محتوى المفاجأة السرية التي تظهر عند الفتح..." rows="3" required class="p-2.5 rounded-lg border border-gold/30 md:col-span-2"></textarea>
+                        <button type="submit" class="py-2.5 px-6 bg-gold text-white rounded-lg font-bold hover:bg-golddark transition-colors md:col-span-2">إضافة المفاجأة</button>
+                    </form>
+                </div>
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_current_surprises">المفاجآت الحالية</h4>
+                    <div id="adm-surprises-list" class="space-y-3"></div>
+                </div>
+            </div>
+
+            <!-- TAB 8: SECURITY & BACKUP -->
+            <div id="admin-tab-security" class="admin-tab-content space-y-6 hidden">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h4 class="font-bold text-lg text-gray-800 mb-4" data-i18n="adm_change_pass">تغيير كلمة مرور الأدمن</h4>
+                    <form onsubmit="handleChangePassword(event)" class="max-w-md space-y-4">
+                        <input type="password" id="new-password" placeholder="كلمة المرور الجديدة" required class="w-full p-2.5 rounded-lg border border-gold/30">
+                        <button type="submit" class="py-2.5 px-6 bg-gold text-white rounded-lg font-bold hover:bg-golddark transition-colors">تحديث كلمة المرور</button>
+                    </form>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl space-y-4">
+                    <h4 class="font-bold text-lg text-gray-800 border-b border-gold/20 pb-2" data-i18n="adm_backup_heading">تصدير واستيراد النسخة الاحتياطية (Backup)</h4>
+                    <p class="text-xs text-gray-500">تستطيع تصدير جميع بيانات الموقع والأقسام والذكريات لحفظها أو نقلها لجهاز آخر بسهولة.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="exportBackupData()" class="px-6 py-3 rounded-xl bg-slate-800 text-white font-semibold hover:bg-slate-900 transition-colors flex items-center gap-2">
+                            <i class="fas fa-download"></i>
+                            <span data-i18n="adm_export_btn">تصدير النسخة الاحتياطية (JSON)</span>
+                        </button>
+                        <label class="px-6 py-3 rounded-xl bg-amber-600 text-white font-semibold hover:bg-amber-700 transition-colors cursor-pointer flex items-center gap-2">
+                            <i class="fas fa-upload"></i>
+                            <span data-i18n="adm_import_btn">استيراد نسخة احتياطية</span>
+                            <input type="file" accept=".json" onchange="importBackupData(event)" class="hidden">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT ENGINE -->
+    <script>
+        /* ==========================================================================
+           1. INITIAL APP STATE & DICTIONARIES
+           ========================================================================== */
+        const DEFAULT_PASS = "S12";
+        let currentLang = 'ar';
+        let isMusicPlaying = false;
+        let db = null;
+
+        // Translation Dictionary (Arabic & English)
+        const i18n = {
+            ar: {
+                load_text: "جاري تحميل عالم إسراء...",
+                music_start: "تشغيل الموسيقى",
+                music_stop: "إيقاف الموسيقى",
+                hero_title: "إسـراء",
+                hero_subtitle: "ESRAA WORLD",
+                hero_quote: `"عالمٌ ينبض بالورد الأبيض والجمال الهادئ، مكرّس لأجمل التفاصيل وأرقّ الذكريات."`,
+                hero_enter: "دخول إلى عالم إسراء",
+                hero_footer: "تصميم رومانسي فاخر • مخصص لإسراء",
+                nav_memories: "الذكريات",
+                nav_gallery: "معرض الصور",
+                nav_ideas: "الأفكار والملاحظات",
+                nav_messages: "الرسائل الخاصة",
+                nav_wishes: "قائمة الأمنيات",
+                nav_surprises: "المفاجآت",
+                nav_admin: "الأدمن",
+                header_subtitle: "عالم مخصص لحبيبة العمر",
+                header_quote: `"في هذا المكان، يزهر الورد الأبيض تخليداً لكل لحظة جميلة وابتسامة صادقة."`,
+                sec_memories_title: "قسم الذكريات",
+                sec_memories_sub: "لحظات حُفرت في الوجدان بجمالها",
+                sec_gallery_title: "قسم الصور الاحترافي",
+                sec_gallery_sub: "معرض صور بنقاء الورد الأبيض",
+                sec_ideas_title: "قسم الأفكار والملاحظات",
+                sec_ideas_sub: "رؤى وخطط لمستقبل أجمل",
+                sec_messages_title: "قسم الرسائل الخاصة",
+                sec_messages_sub: "رسائل مطوية بحب وشغف",
+                sec_wishes_title: "قائمة الأمنيات",
+                sec_wishes_sub: "أحلام نسعى لتحقيقها معاً",
+                wishes_progress_label: "نسبة الأمنيات المحققة",
+                sec_surprises_title: "قسم المفاجآت",
+                sec_surprises_sub: "اضغطي على الصناديق لاكتشاف اللمسات السحرية",
+                footer_quote: "صُنِعَ بشغف وحب لإسراء • كل الأوقات أجمل معكِ",
+                admin_auth_title: "دخول الأدمن",
+                admin_auth_sub: "أدخل كلمة المرور للوصول إلى لوحة التحكم",
+                admin_pass_label: "كلمة المرور",
+                admin_login_btn: "تسجيل الدخول",
+                admin_pass_error: "كلمة المرور غير صحيحة! (الافتراضية: S12)",
+                admin_panel_heading: "لوحة تحكم الأدمن الشاملة",
+                admin_save_btn: "حفظ جميع التعديلات",
+                admin_close_btn: "إغلاق والمعاينة",
+                tab_general: "الإعدادات العامة والنصوص",
+                tab_memories: "إدارة الذكريات",
+                tab_gallery: "إدارة الصور",
+                tab_ideas: "إدارة الأفكار",
+                tab_messages: "إدارة الرسائل",
+                tab_wishes: "إدارة الأمنيات",
+                tab_surprises: "إدارة المفاجآت",
+                tab_security: "الأمان والنسخ الاحتياطي",
+                adm_site_titles: "عناوين الموقع والنصوص الترحيبية",
+                adm_anim_settings: "إعدادات الأنيميشن والموسيقى",
+                adm_add_memory: "إضافة ذكرى جديدة",
+                adm_current_memories: "الذكريات الحالية",
+                adm_upload_photo: "رفع صورة جديدة للمعرض",
+                adm_current_photos: "الصور الحالية",
+                adm_add_idea: "إضافة فكرة جديدة",
+                adm_current_ideas: "الأفكار الحالية",
+                adm_add_msg: "إضافة رسالة جديدة",
+                adm_current_msgs: "الرسائل الحالية",
+                adm_add_wish: "إضافة أمنية جديدة",
+                adm_current_wishes: "قائمة الأمنيات",
+                adm_add_surprise: "إضافة مفاجأة جديدة",
+                adm_current_surprises: "المفاجآت الحالية",
+                adm_change_pass: "تغيير كلمة مرور الأدمن",
+                adm_backup_heading: "تصدير واستيراد النسخة الاحتياطية (Backup)",
+                adm_export_btn: "تصدير النسخة الاحتياطية (JSON)",
+                adm_import_btn: "استيراد نسخة احتياطية"
+            },
+            en: {
+                load_text: "Loading Esraa's World...",
+                music_start: "Play Music",
+                music_stop: "Stop Music",
+                hero_title: "ESRAA",
+                hero_subtitle: "ESRAA WORLD",
+                hero_quote: `"A realm blooming with white roses and serene beauty, dedicated to precious memories."`,
+                hero_enter: "Enter Esraa's World",
+                hero_footer: "Luxury Romantic Design • Dedicated to Esraa",
+                nav_memories: "Memories",
+                nav_gallery: "Gallery",
+                nav_ideas: "Ideas & Notes",
+                nav_messages: "Private Letters",
+                nav_wishes: "Wishlist",
+                nav_surprises: "Surprises",
+                nav_admin: "Admin Panel",
+                header_subtitle: "A World Built for My Loved One",
+                header_quote: `"In this place, white roses bloom to immortalize every beautiful moment and smile."`,
+                sec_memories_title: "Memories Album",
+                sec_memories_sub: "Unforgettable moments etched in heart",
+                sec_gallery_title: "Photo Gallery",
+                sec_gallery_sub: "Pure and elegant photo collection",
+                sec_ideas_title: "Ideas & Notes",
+                sec_ideas_sub: "Visions and plans for a brighter future",
+                sec_messages_title: "Paper Love Letters",
+                sec_messages_sub: "Envelopes folded with love",
+                sec_wishes_title: "Wishlist",
+                sec_wishes_sub: "Dreams we strive to accomplish together",
+                wishes_progress_label: "Completed Wishes Progress",
+                sec_surprises_title: "Surprises Box",
+                sec_surprises_sub: "Click the mystery boxes to reveal romantic gifts",
+                footer_quote: "Created with passion & love for Esraa",
+                admin_auth_title: "Admin Access",
+                admin_auth_sub: "Enter password to access control dashboard",
+                admin_pass_label: "Password",
+                admin_login_btn: "Log In",
+                admin_pass_error: "Incorrect Password! (Default: S12)",
+                admin_panel_heading: "Admin Control Dashboard",
+                admin_save_btn: "Save All Changes",
+                admin_close_btn: "Close & Preview",
+                tab_general: "General Settings",
+                tab_memories: "Manage Memories",
+                tab_gallery: "Manage Gallery",
+                tab_ideas: "Manage Ideas",
+                tab_messages: "Manage Letters",
+                tab_wishes: "Manage Wishes",
+                tab_surprises: "Manage Surprises",
+                tab_security: "Security & Backup",
+                adm_site_titles: "Site Titles & Texts",
+                adm_anim_settings: "Animation & Audio Controls",
+                adm_add_memory: "Add New Memory",
+                adm_current_memories: "Current Memories",
+                adm_upload_photo: "Upload Photo to Gallery",
+                adm_current_photos: "Current Photos",
+                adm_add_idea: "Add New Idea",
+                adm_current_ideas: "Current Ideas",
+                adm_add_msg: "Add New Letter",
+                adm_current_msgs: "Current Letters",
+                adm_add_wish: "Add New Wish",
+                adm_current_wishes: "Wishes List",
+                adm_add_surprise: "Add New Surprise Box",
+                adm_current_surprises: "Current Surprises",
+                adm_change_pass: "Change Admin Password",
+                adm_backup_heading: "Data Export & Import Backup",
+                adm_export_btn: "Export JSON Backup",
+                adm_import_btn: "Import JSON Backup"
+            }
+        };
+
+        // Initial Seed Content
+        let appData = {
+            adminPassword: DEFAULT_PASS,
+            siteNameAr: "إسـراء",
+            siteNameEn: "ESRAA",
+            heroQuoteAr: `"عالمٌ ينبض بالورد الأبيض والجمال الهادئ، مكرّس لأجمل التفاصيل وأرقّ الذكريات."`,
+            heroQuoteEn: `"A realm blooming with white roses and serene beauty, dedicated to precious memories."`,
+            enablePetals: true,
+            autoPlayMusic: false,
+            memories: [
+                { id: 1, title: "أول لقاء بيننا 🌷", date: "2023-05-14", desc: "اليوم الذي أزهرت فيه الحياة وأشرقت الابتسامة على قلبي.", image: "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80" },
+                { id: 2, title: "رحلة الورد الأبيض 🕊️", date: "2023-10-20", desc: "أوقات ساحرة مليئة بالتفاصيل الراقية والهادئة.", image: "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=800&q=80" }
+            ],
+            gallery: [
+                { id: 1, caption: "نقاء الورد الأبيض", tag: "ورد", image: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80" },
+                { id: 2, caption: "لحظات ذهبية", tag: "ذكريات", image: "https://images.unsplash.com/photo-1533616688419-b7a585564566?auto=format&fit=crop&w=800&q=80" },
+                { id: 3, caption: "جمال هادئ", tag: "إسراء", image: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80" }
+            ],
+            ideas: [
+                { id: 1, title: "سفر لمدينة الأحلام ✨", category: "رحلات", content: "تخطيط لزيارة حديقة الورود الكبرى وقضاء أوقات شاعريّة هادئة.", pinned: true },
+                { id: 2, title: "كتابة مذكرات مشتركة 📖", category: "هوايات", content: "تخصيص دفتر جلدي فاخر لتسجيل أجمل المواقف والأحداث كلياً.", pinned: false }
+            ],
+            messages: [
+                { id: 1, title: "إلى إسراء.. أميرة الورد 🌹", date: "2024-01-01", body: "إسراء الحبيبة، وجودكِ في حياتي يشبه شروق الشمس بعد ليلة طويلة. كوني دائماً بخير وبجاني." },
+                { id: 2, title: "رسالة شكر وامتنان ✨", date: "2024-02-14", body: "شكراً لكل ابتسامة زَيّنتِ بها أيامي، ولكل كلمة رقيقة بعثتِ بها الدفء في قلبي." }
+            ],
+            wishes: [
+                { id: 1, text: "زيارة أجمل الحدائق العالمية 🌸", completed: true },
+                { id: 2, text: "قضاء أمسية شاعرية تحت النجوم ✨", completed: false },
+                { id: 3, text: "تأسيس ركن الورد الأبيض الخاص بكِ 🏡", completed: false }
+            ],
+            surprises: [
+                { id: 1, title: "مفاجأة 1 🎁", icon: "🎁", content: "أنتِ أجمل هدية قدمتها لي الحياة! 🌷" },
+                { id: 2, title: "سرّ صغير 👑", icon: "👑", content: "لكِ تاج الجمال والرقة في كل وقت ومكان!" },
+                { id: 3, title: "لمسة ساحرة 💫", icon: "💫", content: "ابتسامتكِ تضيء أظلم الأوقات، فحافظي عليها دائماً!" }
+            ]
+        };
+
+        /* ==========================================================================
+           2. INDEXEDDB ENGINE (For high-res photo uploads)
+           ========================================================================== */
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open("EsraaWorldDB", 1);
+                request.onupgradeneeded = (e) => {
+                    const database = e.target.result;
+                    if (!database.objectStoreNames.contains("images")) {
+                        database.createObjectStore("images", { keyPath: "id" });
+                    }
+                };
+                request.onsuccess = (e) => {
+                    db = e.target.result;
+                    resolve(db);
+                };
+                request.onerror = (e) => reject(e.target.error);
+            });
+        }
+
+        function saveImageToDB(id, blobData) {
+            return new Promise((resolve, reject) => {
+                if (!db) return resolve(blobData); // fallback
+                const tx = db.transaction("images", "readwrite");
+                const store = tx.objectStore("images");
+                store.put({ id: id, data: blobData });
+                tx.oncomplete = () => resolve();
+                tx.onerror = (e) => reject(e.target.error);
+            });
+        }
+
+        function getImageFromDB(id) {
+            return new Promise((resolve) => {
+                if (!db) return resolve(null);
+                const tx = db.transaction("images", "readonly");
+                const store = tx.objectStore("images");
+                const req = store.get(id);
+                req.onsuccess = () => resolve(req.result ? req.result.data : null);
+                req.onerror = () => resolve(null);
+            });
+        }
+
+        /* ==========================================================================
+           3. CANVAS WHITE ROSE PETALS ANIMATION
+           ========================================================================== */
+        const canvas = document.getElementById('petals-canvas');
+        const ctx = canvas.getContext('2d');
+        let petals = [];
+        const numPetals = 35;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Petal {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * -canvas.height;
+                this.size = Math.random() * 12 + 8;
+                this.speedY = Math.random() * 1.2 + 0.6;
+                this.speedX = Math.random() * 0.8 - 0.4;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = Math.random() * 1.5 - 0.75;
+                this.opacity = Math.random() * 0.5 + 0.4;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.01) + this.speedX;
+                this.rotation += this.rotSpeed;
+                if (this.y > canvas.height + 20) {
+                    this.reset();
+                }
+            }
+            draw() {
+                if (!appData.enablePetals) return;
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.beginPath();
+                // Soft white petal shape with golden/pink tone gradient
+                const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+                grad.addColorStop(0, `rgba(255, 253, 251, ${this.opacity})`);
+                grad.addColorStop(0.7, `rgba(247, 235, 232, ${this.opacity * 0.8})`);
+                grad.addColorStop(1, `rgba(212, 175, 55, ${this.opacity * 0.3})`);
+
+                ctx.fillStyle = grad;
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size / 2, -this.size / 2, -this.size, this.size / 3, 0, this.size);
+                ctx.bezierCurveTo(this.size, this.size / 3, this.size / 2, -this.size / 2, 0, 0);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function initPetals() {
+            petals = [];
+            for (let i = 0; i < numPetals; i++) {
+                petals.push(new Petal());
+            }
+        }
+
+        function animatePetals() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animatePetals);
+        }
+
+        /* ==========================================================================
+           4. DATA STORAGE & SYNC (LocalStorage & IDB)
+           ========================================================================== */
+        function loadStoredData() {
+            const stored = localStorage.getItem('esraa_world_data');
+            if (stored) {
+                try {
+                    appData = Object.assign({}, appData, JSON.parse(stored));
+                } catch(e) { console.error(e); }
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('esraa_world_data', JSON.stringify(appData));
+            renderUI();
+        }
+
+        /* ==========================================================================
+           5. UI RENDERING ENGINES
+           ========================================================================== */
+        function updateLanguageUI() {
+            const dict = i18n[currentLang];
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key]) el.textContent = dict[key];
+            });
+
+            // Dynamic Header Updates
+            document.getElementById('hero-title').textContent = currentLang === 'ar' ? appData.siteNameAr : appData.siteNameEn;
+            document.getElementById('hero-quote').textContent = currentLang === 'ar' ? appData.heroQuoteAr : appData.heroQuoteEn;
+            document.getElementById('main-header-title').textContent = `${appData.siteNameAr} | ${appData.siteNameEn}`;
+            document.getElementById('nav-brand').textContent = appData.siteNameEn;
+            
+            document.getElementById('lang-btn-text').textContent = currentLang === 'ar' ? 'English' : 'عربي';
+            document.getElementById('nav-lang-text').textContent = currentLang === 'ar' ? 'English' : 'عربي';
+        }
+
+        async function renderMemories() {
+            const grid = document.getElementById('memories-grid');
+            grid.innerHTML = '';
+
+            for (const item of appData.memories) {
+                let imgSrc = item.image;
+                if (imgSrc.startsWith('db_img_')) {
+                    const blob = await getImageFromDB(imgSrc);
+                    if (blob) imgSrc = blob;
+                }
+
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-3xl overflow-hidden hover:scale-[1.02] transition-transform duration-300 box-gold-glow flex flex-col";
+                card.innerHTML = `
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${imgSrc}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                        <span class="absolute top-4 right-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-gold border border-gold/30">${item.date}</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-xl font-serif-title font-bold text-gray-800 mb-2">${item.title}</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed font-light">${item.desc}</p>
+                        </div>
+                        <button onclick="openLightbox('${imgSrc}', '${item.title}')" class="mt-4 text-xs font-bold text-gold hover:text-golddark flex items-center gap-1">
+                            <span>تكبير الصورة</span>
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        async function renderGallery() {
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = '';
+
+            for (const item of appData.gallery) {
+                let imgSrc = item.image;
+                if (imgSrc.startsWith('db_img_')) {
+                    const blob = await getImageFromDB(imgSrc);
+                    if (blob) imgSrc = blob;
+                }
+
+                const card = document.createElement('div');
+                card.className = "group relative aspect-square rounded-2xl overflow-hidden cursor-pointer shadow-md border border-gold/20";
+                card.onclick = () => openLightbox(imgSrc, item.caption);
+                card.innerHTML = `
+                    <img src="${imgSrc}" alt="${item.caption}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 text-white">
+                        <span class="text-xs text-goldlight font-semibold">${item.tag || 'ESRAA'}</span>
+                        <p class="font-serif-title text-sm font-bold">${item.caption}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        function renderIdeas() {
+            const grid = document.getElementById('ideas-grid');
+            grid.innerHTML = '';
+
+            // Sort pinned first
+            const sorted = [...appData.ideas].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+
+            sorted.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `p-6 rounded-3xl relative transition-all duration-300 ${item.pinned ? 'bg-goldlight/20 border-2 border-gold box-gold-glow' : 'glass-card border border-gold/20'}`;
+                card.innerHTML = `
+                    ${item.pinned ? '<span class="absolute top-4 left-4 text-gold text-lg" title="مثبتة">📌</span>' : ''}
+                    <span class="text-xs font-bold text-gold uppercase tracking-wider block mb-1">${item.category || 'عام'}</span>
+                    <h4 class="text-lg font-serif-title font-bold text-gray-800 mb-2">${item.title}</h4>
+                    <p class="text-gray-600 text-sm leading-relaxed font-light">${item.content}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function renderMessages() {
+            const list = document.getElementById('messages-list');
+            list.innerHTML = '';
+
+            appData.messages.forEach(item => {
+                const msgEl = document.createElement('div');
+                msgEl.className = "paper-letter p-6 md:p-8 rounded-2xl transition-transform hover:-translate-y-1 duration-300";
+                msgEl.innerHTML = `
+                    <div class="flex justify-between items-center mb-4 border-b border-gold/20 pb-3">
+                        <h4 class="text-xl font-serif-title font-bold text-gray-800 flex items-center gap-2">
+                            <span>📜</span>
+                            <span>${item.title}</span>
+                        </h4>
+                        <span class="text-xs text-gold font-bold">${item.date || ''}</span>
+                    </div>
+                    <p class="text-gray-700 font-serif-title text-base leading-loose">${item.body}</p>
+                `;
+                list.appendChild(msgEl);
+            });
+        }
+
+        function renderWishes() {
+            const container = document.getElementById('wishes-container');
+            container.innerHTML = '';
+
+            const completedCount = appData.wishes.filter(w => w.completed).length;
+            const pct = appData.wishes.length ? Math.round((completedCount / appData.wishes.length) * 100) : 0;
+            document.getElementById('wishes-percentage').textContent = `${pct}%`;
+            document.getElementById('wishes-progress-bar').style.width = `${pct}%`;
+
+            appData.wishes.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.className = `flex items-center justify-between p-4 rounded-xl border transition-all ${item.completed ? 'bg-emerald-50/50 border-emerald-300 text-gray-500 line-through' : 'bg-white border-gold/20 text-gray-800'}`;
+                itemEl.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" ${item.completed ? 'checked' : ''} onchange="toggleWishStatus(${item.id})" class="w-5 h-5 accent-gold cursor-pointer">
+                        <span class="font-medium text-sm md:text-base">${item.text}</span>
+                    </div>
+                    ${item.completed ? '<span class="text-xs text-emerald-600 font-bold">متحققة ✨</span>' : ''}
+                `;
+                container.appendChild(itemEl);
+            });
+        }
+
+        function renderSurprises() {
+            const grid = document.getElementById('surprises-grid');
+            grid.innerHTML = '';
+
+            appData.surprises.forEach(item => {
+                const box = document.createElement('div');
+                box.className = "glass-card rounded-3xl p-8 text-center cursor-pointer hover:scale-105 transition-all duration-300 box-gold-glow group border border-gold/30";
+                box.onclick = function() {
+                    openSurpriseModal(item.title, item.content);
+                };
+                box.innerHTML = `
+                    <div class="text-5xl mb-4 group-hover:rotate-12 transition-transform duration-300">${item.icon || '🎁'}</div>
+                    <h4 class="text-xl font-serif-title font-bold text-gray-800 mb-2">${item.title}</h4>
+                    <span class="text-xs text-gold font-bold underline" data-i18n="click_to_open">اضغطي لفتح المفاجأة ✨</span>
+                `;
+                grid.appendChild(box);
+            });
+        }
+
+        function renderUI() {
+            updateLanguageUI();
+            renderMemories();
+            renderGallery();
+            renderIdeas();
+            renderMessages();
+            renderWishes();
+            renderSurprises();
+        }
+
+        /* ==========================================================================
+           6. INTERACTIVE ACTIONS & HANDLERS
+           ========================================================================== */
+        function enterWorld() {
+            const hero = document.getElementById('hero-screen');
+            const main = document.getElementById('main-app');
+            
+            hero.classList.add('opacity-0', 'scale-105', 'pointer-events-none');
+            setTimeout(() => {
+                hero.classList.add('hidden');
+                main.classList.remove('opacity-0', 'pointer-events-none');
+            }, 800);
+
+            if (appData.autoPlayMusic && !isMusicPlaying) {
+                toggleMusic();
+            }
+        }
+
+        function exitWorld() {
+            const hero = document.getElementById('hero-screen');
+            const main = document.getElementById('main-app');
+            hero.classList.remove('hidden');
+            setTimeout(() => {
+                hero.classList.remove('opacity-0', 'scale-105', 'pointer-events-none');
+                main.classList.add('opacity-0', 'pointer-events-none');
+            }, 50);
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            updateLanguageUI();
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            const statusText = document.getElementById('music-status-text');
+            const navIcon = document.getElementById('nav-music-icon');
+            
+            if (isMusicPlaying) {
+                audio.pause();
+                isMusicPlaying = false;
+                statusText.textContent = i18n[currentLang].music_start;
+                navIcon.className = "fas fa-music text-xs";
+            } else {
+                audio.play().then(() => {
+                    isMusicPlaying = true;
+                    statusText.textContent = i18n[currentLang].music_stop;
+                    navIcon.className = "fas fa-pause text-xs";
+                }).catch(e => console.log("Audio play blocked", e));
+            }
+        }
+
+        function toggleWishStatus(id) {
+            const wish = appData.wishes.find(w => w.id === id);
+            if (wish) {
+                wish.completed = !wish.completed;
+                saveData();
+            }
+        }
+
+        function openLightbox(imgSrc, caption) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-caption').textContent = caption || '';
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+
+        function openSurpriseModal(title, content) {
+            alert(`💖 ${title}\n\n${content}`);
+        }
+
+        /* ==========================================================================
+           7. ADMIN PANEL ENGINE & MODALS
+           ========================================================================== */
+        function openAdminAuthModal() {
+            document.getElementById('admin-auth-modal').classList.remove('hidden');
+        }
+
+        function closeAdminAuthModal() {
+            document.getElementById('admin-auth-modal').classList.add('hidden');
+            document.getElementById('admin-auth-error').classList.add('hidden');
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('admin-password-input').value;
+            if (pass === appData.adminPassword) {
+                closeAdminAuthModal();
+                document.getElementById('admin-password-input').value = '';
+                openAdminPanel();
+            } else {
+                document.getElementById('admin-auth-error').classList.remove('hidden');
+            }
+        }
+
+        function openAdminPanel() {
+            populateAdminData();
+            document.getElementById('admin-panel-modal').classList.remove('hidden');
+        }
+
+        function closeAdminPanel() {
+            document.getElementById('admin-panel-modal').classList.add('hidden');
+        }
+
+        function switchAdminTab(tabName) {
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                if (btn.getAttribute('data-tab') === tabName) {
+                    btn.className = "admin-tab-btn active px-4 py-2 rounded-xl bg-gold text-white text-sm font-semibold";
+                } else {
+                    btn.className = "admin-tab-btn px-4 py-2 rounded-xl bg-gray-200 text-gray-700 text-sm font-semibold";
+                }
+            });
+
+            document.querySelectorAll('.admin-tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+        }
+
+        function populateAdminData() {
+            // General Settings
+            document.getElementById('adm-site-name-ar').value = appData.siteNameAr;
+            document.getElementById('adm-site-name-en').value = appData.siteNameEn;
+            document.getElementById('adm-hero-quote-ar').value = appData.heroQuoteAr;
+            document.getElementById('adm-hero-quote-en').value = appData.heroQuoteEn;
+            document.getElementById('adm-toggle-petals').checked = appData.enablePetals;
+            document.getElementById('adm-toggle-music-auto').checked = appData.autoPlayMusic;
+
+            // Render admin lists
+            renderAdminMemoriesList();
+            renderAdminGalleryList();
+            renderAdminIdeasList();
+            renderAdminMessagesList();
+            renderAdminWishesList();
+            renderAdminSurprisesList();
+        }
+
+        function saveAllAdminChanges() {
+            appData.siteNameAr = document.getElementById('adm-site-name-ar').value;
+            appData.siteNameEn = document.getElementById('adm-site-name-en').value;
+            appData.heroQuoteAr = document.getElementById('adm-hero-quote-ar').value;
+            appData.heroQuoteEn = document.getElementById('adm-hero-quote-en').value;
+            appData.enablePetals = document.getElementById('adm-toggle-petals').checked;
+            appData.autoPlayMusic = document.getElementById('adm-toggle-music-auto').checked;
+
+            saveData();
+            alert("تم حفظ جميع التعديلات بنجاح! ✨");
+        }
+
+        // --- Admin Memories Handlers ---
+        async function handleAddMemory(e) {
+            e.preventDefault();
+            const title = document.getElementById('mem-title').value;
+            const date = document.getElementById('mem-date').value;
+            const desc = document.getElementById('mem-desc').value;
+            const fileInput = document.getElementById('mem-image-file');
+
+            let imageKey = "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=80";
+
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = async function(event) {
+                    const blobData = event.target.result;
+                    imageKey = `db_img_mem_${Date.now()}`;
+                    await saveImageToDB(imageKey, blobData);
+
+                    appData.memories.push({ id: Date.now(), title, date, desc, image: imageKey });
+                    saveData();
+                    renderAdminMemoriesList();
+                    e.target.reset();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                appData.memories.push({ id: Date.now(), title, date, desc, image: imageKey });
+                saveData();
+                renderAdminMemoriesList();
+                e.target.reset();
+            }
+        }
+
+        function deleteMemory(id) {
+            appData.memories = appData.memories.filter(m => m.id !== id);
+            saveData();
+            renderAdminMemoriesList();
+        }
+
+        function renderAdminMemoriesList() {
+            const container = document.getElementById('adm-memories-list');
+            container.innerHTML = '';
+            appData.memories.forEach(m => {
+                container.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-gold/20">
+                        <div>
+                            <strong class="text-gray-800">${m.title}</strong> (${m.date})
+                        </div>
+                        <button onclick="deleteMemory(${m.id})" class="text-red-500 hover:text-red-700 text-sm font-bold">حذف</button>
+                    </div>
+                `;
+            });
+        }
+
+        // --- Admin Gallery Handlers ---
+        async function handleAddGalleryPhoto(e) {
+            e.preventDefault();
+            const caption = document.getElementById('gal-caption').value;
+            const tag = document.getElementById('gal-tag').value;
+            const fileInput = document.getElementById('gal-image-file');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = async function(event) {
+                    const blobData = event.target.result;
+                    const imageKey = `db_img_gal_${Date.now()}`;
+                    await saveImageToDB(imageKey, blobData);
+
+                    appData.gallery.push({ id: Date.now(), caption, tag, image: imageKey });
+                    saveData();
+                    renderAdminGalleryList();
+                    e.target.reset();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function deleteGalleryPhoto(id) {
+            appData.gallery = appData.gallery.filter(g => g.id !== id);
+            saveData();
+            renderAdminGalleryList();
+        }
+
+        function renderAdminGalleryList() {
+            const container = document.getElementById('adm-gallery-list');
+            container.innerHTML = '';
+            appData.gallery.forEach(g => {
+                container.innerHTML += `
+                    <div class="p-2 bg-white rounded-xl border border-gold/20 text-center relative group">
+                        <p class="text-xs font-bold truncate mb-1">${g.caption}</p>
+                        <button onclick="deleteGalleryPhoto(${g.id})" class="w-full py-1 bg-red-500 text-white rounded text-xs font-bold hover:bg-red-600">حذف</button>
+                    </div>
+                `;
+            });
+        }
+
+        // --- Admin Ideas Handlers ---
+        function handleAddIdea(e) {
+            e.preventDefault();
+            const title = document.getElementById('idea-title').value;
+            const category = document.getElementById('idea-category').value;
+            const content = document.getElementById('idea-content').value;
+            const pinned = document.getElementById('idea-pinned').checked;
+
+            appData.ideas.push({ id: Date.now(), title, category, content, pinned });
+            saveData();
+            renderAdminIdeasList();
+            e.target.reset();
+        }
+
+        function deleteIdea(id) {
+            appData.ideas = appData.ideas.filter(i => i.id !== id);
+            saveData();
+            renderAdminIdeasList();
+        }
+
+        function renderAdminIdeasList() {
+            const container = document.getElementById('adm-ideas-list');
+            container.innerHTML = '';
+            appData.ideas.forEach(i => {
+                container.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-gold/20">
+                        <div>
+                            <strong class="text-gray-800">${i.title}</strong> [${i.category || 'عام'}]
+                        </div>
+                        <button onclick="deleteIdea(${i.id})" class="text-red-500 hover:text-red-700 text-sm font-bold">حذف</button>
+                    </div>
+                `;
+            });
+        }
+
+        // --- Admin Messages Handlers ---
+        function handleAddMessage(e) {
+            e.preventDefault();
+            const title = document.getElementById('msg-title').value;
+            const date = document.getElementById('msg-date').value;
+            const body = document.getElementById('msg-body').value;
+
+            appData.messages.push({ id: Date.now(), title, date, body });
+            saveData();
+            renderAdminMessagesList();
+            e.target.reset();
+        }
+
+        function deleteMessage(id) {
+            appData.messages = appData.messages.filter(m => m.id !== id);
+            saveData();
+            renderAdminMessagesList();
+        }
+
+        function renderAdminMessagesList() {
+            const container = document.getElementById('adm-messages-list');
+            container.innerHTML = '';
+            appData.messages.forEach(m => {
+                container.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-gold/20">
+                        <div>
+                            <strong class="text-gray-800">${m.title}</strong>
+                        </div>
+                        <button onclick="deleteMessage(${m.id})" class="text-red-500 hover:text-red-700 text-sm font-bold">حذف</button>
+                    </div>
+                `;
+            });
+        }
+
+        // --- Admin Wishes Handlers ---
+        function handleAddWish(e) {
+            e.preventDefault();
+            const text = document.getElementById('wish-text').value;
+            appData.wishes.push({ id: Date.now(), text, completed: false });
+            saveData();
+            renderAdminWishesList();
+            e.target.reset();
+        }
+
+        function deleteWish(id) {
+            appData.wishes = appData.wishes.filter(w => w.id !== id);
+            saveData();
+            renderAdminWishesList();
+        }
+
+        function renderAdminWishesList() {
+            const container = document.getElementById('adm-wishes-list');
+            container.innerHTML = '';
+            appData.wishes.forEach(w => {
+                container.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-gold/20">
+                        <span class="${w.completed ? 'line-through text-gray-400' : ''}">${w.text}</span>
+                        <button onclick="deleteWish(${w.id})" class="text-red-500 hover:text-red-700 text-sm font-bold">حذف</button>
+                    </div>
+                `;
+            });
+        }
+
+        // --- Admin Surprises Handlers ---
+        function handleAddSurprise(e) {
+            e.preventDefault();
+            const title = document.getElementById('surp-title').value;
+            const icon = document.getElementById('surp-icon').value || '🎁';
+            const content = document.getElementById('surp-content').value;
+
+            appData.surprises.push({ id: Date.now(), title, icon, content });
+            saveData();
+            renderAdminSurprisesList();
+            e.target.reset();
+        }
+
+        function deleteSurprise(id) {
+            appData.surprises = appData.surprises.filter(s => s.id !== id);
+            saveData();
+            renderAdminSurprisesList();
+        }
+
+        function renderAdminSurprisesList() {
+            const container = document.getElementById('adm-surprises-list');
+            container.innerHTML = '';
+            appData.surprises.forEach(s => {
+                container.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-white rounded-xl border border-gold/20">
+                        <div>
+                            <span class="mr-2">${s.icon}</span>
+                            <strong class="text-gray-800">${s.title}</strong>
+                        </div>
+                        <button onclick="deleteSurprise(${s.id})" class="text-red-500 hover:text-red-700 text-sm font-bold">حذف</button>
+                    </div>
+                `;
+            });
+        }
+
+        // --- Security & Password Change ---
+        function handleChangePassword(e) {
+            e.preventDefault();
+            const newPass = document.getElementById('new-password').value;
+            if (newPass) {
+                appData.adminPassword = newPass;
+                saveData();
+                alert("تم تغيير كلمة المرور بنجاح! 🔒");
+                e.target.reset();
+            }
+        }
+
+        // --- Export & Import Backup ---
+        function exportBackupData() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", `ESRAA_World_Backup_${Date.now()}.json`);
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        function importBackupData(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                try {
+                    const imported = JSON.parse(event.target.result);
+                    appData = Object.assign({}, appData, imported);
+                    saveData();
+                    populateAdminData();
+                    alert("تم استيراد النسخة الاحتياطية بنجاح! ✨");
+                } catch(err) {
+                    alert("خطأ في قراءة ملف النسخة الاحتياطية!");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        /* ==========================================================================
+           8. APPLICATION INITIALIZATION
+           ========================================================================== */
+        window.onload = async function() {
+            loadStoredData();
+            await initDB();
+            initPetals();
+            animatePetals();
+            renderUI();
+
+            // Hide Loading Screen
+            setTimeout(() => {
+                const loader = document.getElementById('loading-screen');
+                loader.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => loader.remove(), 700);
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
